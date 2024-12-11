@@ -35,7 +35,7 @@ services:
       command:
         - '--config.file=/etc/prometheus/prometheus.yml'
       volumes:
-        - ./prometheus/:/etc/prometheus/
+        - ./prometheus/:/etc/prometheus/  # incase of error try to use full path insterad of ./
       ports:
         - 9090:9090
   collector:
