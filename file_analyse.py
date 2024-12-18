@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-def load_excel("input.xlsx"):
+def load_excel(file_path):
     try:
-        data = pd.read_excel(file_path, sheet_name=sheet1, engine='openpyxl')  # Load all sheets
+        data = pd.read_excel(file_path, sheet_name=input, engine='openpyxl')  # Load all sheets
         return data
     except Exception as e:
         print(f"Error loading Excel file: {e}")
@@ -34,7 +34,7 @@ def analyze_data(dataframes):
         analysis_results[sheet_name] = sheet_analysis
     return analysis_results
 # Save analysis to a file
-def save_analysis(results, "output.txt"):
+def save_analysis(results, output_file):
     try:
         with open(output_path, 'w') as f:
             for sheet_name, analysis in results.items():
@@ -45,10 +45,10 @@ def save_analysis(results, "output.txt"):
     except Exception as e:
         print(f"Error saving analysis: {e}")
 if __name__ == "__main__":
-    input_file = "input.xlsx"  # Replace with your file path
+    file_path ="input.xlsx"  # Replace with your file path
     output_file = "output.txt"
     # Load and analyze data
-    dataframes = load_excel(input_file)
+    dataframes = load_excel(file_path)
     if dataframes:
         analysis_results = analyze_data(dataframes)
         save_analysis(analysis_results, output_file)
