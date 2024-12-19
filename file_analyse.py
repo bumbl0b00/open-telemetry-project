@@ -41,7 +41,7 @@ def save_analysis(results, output_file):
                 f.write(f"Sheet: {sheet_name}\n")
                 for key, value in analysis.items():
                     f.write(f"{key}:\n{value}\n\n")
-        print(f"Analysis saved to {output_path}")
+        print(f"Analysis saved to {output_file}")
     except Exception as e:
         print(f"Error saving analysis: {e}")
 if __name__ == "__main__":
