@@ -1,12 +1,14 @@
 import pandas as pd
 import numpy as np
+
 def load_excel(file_path):
     try:
-        data = pd.read_excel(file_path, sheet_name=input, engine='openpyxl')  # Load all sheets
+        data = pd.read_excel(file_path, sheet_name=None, engine='openpyxl')  # Load all sheets
         return data
     except Exception as e:
         print(f"Error loading Excel file: {e}")
         return None
+
 def analyze_data(dataframes):
     analysis_results = {}
     for sheet_name, df in dataframes.items():
@@ -15,9 +17,9 @@ def analyze_data(dataframes):
         # Basic information
         sheet_analysis['Shape'] = df.shape
         sheet_analysis['Columns'] = df.columns.tolist()
-        sheet_analysis['Missing Values'] = df.isnull().sum().to_dict()    
+        sheet_analysis['Missing Values'] = df.isnull().sum().to_dict()
         # Data type analysis
-        sheet_analysis['Data Types'] = df.dtypes.to_dict() 
+        sheet_analysis['Data Types'] = df.dtypes.to_dict()
         # Identify duplicates
         sheet_analysis['Duplicate Rows'] = df.duplicated().sum()
         # Summary statistics
@@ -33,10 +35,11 @@ def analyze_data(dataframes):
         sheet_analysis['Anomalies'] = anomalies
         analysis_results[sheet_name] = sheet_analysis
     return analysis_results
+
 # Save analysis to a file
 def save_analysis(results, output_file):
     try:
-        with open(output_path, 'w') as f:
+        with open(output_file, 'w') as f:
             for sheet_name, analysis in results.items():
                 f.write(f"Sheet: {sheet_name}\n")
                 for key, value in analysis.items():
@@ -44,8 +47,9 @@ def save_analysis(results, output_file):
         print(f"Analysis saved to {output_file}")
     except Exception as e:
         print(f"Error saving analysis: {e}")
+
 if __name__ == "__main__":
-    file_path ="input.xlsx"  # Replace with your file path
+    file_path = "input.xlsx"  # Replace with your file path
     output_file = "output.txt"
     # Load and analyze data
     dataframes = load_excel(file_path)
